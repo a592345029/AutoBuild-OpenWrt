@@ -331,8 +331,8 @@ jobs:
       env:
         OPENWRT_ARMVIRT: workspace/openwrt/bin/targets/*/*/*rootfs.tar.gz
         PACKAGE_SOC: s905d
-        KERNEL_REPO_URL: https://github.com/ophub/kernel/tree/main/pub/stable
-        KERNEL_VERSION_NAME: 5.4.220
+        KERNEL_REPO_URL: https://github.com/ophub/kernel
+        KERNEL_VERSION_NAME: 5.4.240
         KERNEL_AUTO_LATEST: true
         WHOAMI: v8040
 
