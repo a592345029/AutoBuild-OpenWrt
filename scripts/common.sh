@@ -29,7 +29,7 @@ find . -maxdepth 4 -iname "*verysync" -type d | xargs rm -rf
 find . -maxdepth 4 -iname "*wizard" -type d | xargs rm -rf
 find . -maxdepth 4 -iname "*wrtbwmon" -type d | xargs rm -rf
 find . -maxdepth 4 -iname "*xray*" -type d | xargs rm -rf
-find . -maxdepth 4 -iname "dnsproxy" -type d | xargs rm -rf
+# find . -maxdepth 4 -iname "dnsproxy" -type d | xargs rm -rf
 find . -maxdepth 4 -iname "miniupnpd" -type d | xargs rm -rf
 
 # 添加package
@@ -45,7 +45,7 @@ svn co https://github.com/kenzok8/small-package/trunk/luci-app-onliner package/l
 svn co https://github.com/kenzok8/small-package/trunk/luci-app-wrtbwmon package/luci-app-wrtbwmon
 svn co https://github.com/kenzok8/small-package/trunk/wrtbwmon package/wrtbwmon
 svn co https://github.com/kiddin9/openwrt-packages/trunk/ddnsgo package/ddnsgo
-svn co https://github.com/kiddin9/openwrt-packages/trunk/dnsproxy package/dnsproxy
+# svn co https://github.com/kiddin9/openwrt-packages/trunk/dnsproxy package/dnsproxy
 svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-control-speedlimit package/luci-app-control-speedlimit
 svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-control-timewol package/luci-app-control-timewol
 svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-control-webrestriction package/luci-app-control-webrestriction
