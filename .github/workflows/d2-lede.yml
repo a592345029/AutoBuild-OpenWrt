@@ -316,7 +316,7 @@ jobs:
         cat sha256sums
         cp $OPENWRT_PATH/.config build-${{ env.SOURCE }}.config
         mv -f $OPENWRT_PATH/bin/packages/*/*/*.ipk packages
-        tar -zcf ipk-${{ env.SOURCE }}.tar.gz packages
+        tar -cJf ipk-${{ env.SOURCE }}.tar.xz packages
         rm -rf packages *.buildinfo *.manifest *.json
         ls -lh
         name1=$(basename *initramfs-kernel.bin)
