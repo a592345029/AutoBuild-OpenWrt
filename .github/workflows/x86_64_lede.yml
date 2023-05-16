@@ -9,7 +9,7 @@ env:
   SOURCE_URL: https://github.com/coolsnowwolf/lede
   SOURCE_BRANCH: master
   CONFIG_FILE: configs/x86.config
-  DIY_SCRIPT: scripts/diy/x86_64-lede.sh
+  DIY_SCRIPT: scripts/diy/x86_64_ede.sh
   COM_SCRIPT: scripts/common.sh
   TOOLCHAIN_TAG: Toolchain
   OPENWRT_RELEASE_TAG: x86_64
