@@ -321,13 +321,13 @@ jobs:
         ls -lh
         name1=$(basename *initramfs-kernel.bin)
         name2=$(basename *squashfs-sysupgrade.bin)
-        re_name1=$(echo openwrt-${{ env.SOURCE }}-d2-initramfs-kernel.bin)
-        re_name2=$(echo openwrt-${{ env.SOURCE }}-d2-squashfs-sysupgrade.bin)
+        re_name1=$(echo openwrt-${{ env.SOURCE }}-x86-initramfs-kernel.bin)
+        re_name2=$(echo openwrt-${{ env.SOURCE }}-x86-squashfs-sysupgrade.bin)
         sed -i "s/${name1}/${re_name1}/g" sha256sums
         sed -i "s/${name2}/${re_name2}/g" sha256sums
         mv -f ${name1} ${re_name1}
         mv -f ${name2} ${re_name2}
-        mv -f sha256sums openwrt-${{ env.SOURCE }}-d2.sha256sums
+        mv -f sha256sums openwrt-${{ env.SOURCE }}-x86.sha256sums
         ls -lh
         echo "status=success" >> $GITHUB_OUTPUT
         echo "OUTPUTDATE=$(date +"%m.%d.%H%M")" >> $GITHUB_ENV
@@ -346,7 +346,7 @@ jobs:
         body: |
           >  OpenWrt for ${{ env.OPENWRT_RELEASE_TAG }}
           - 编译时间：`${{ env.DATE }}`
-          - 默认 IP：`10.10.11.1` 默认密码：`password`
+          - 默认 IP：`192.168.99.1` 默认密码：`password`
           - 集成`ddns` `openclash` `zerotier`，没有集成任何存储、下载、USB等相关插件
           - `openclash务必设置小闪存模式`
           - 当前使用版本:【编译前的最后一次➦[${{ env.SOURCE }}源码](${{ env.SOURCE_URL }})更新记录】
