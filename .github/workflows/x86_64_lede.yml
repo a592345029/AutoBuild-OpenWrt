@@ -9,8 +9,7 @@ env:
   SOURCE_URL: https://github.com/coolsnowwolf/lede
   SOURCE_BRANCH: master
   CONFIG_FILE: configs/x86.config
-  DIY_SCRIPT: scripts/diy/x86_64_ede.sh
-  COM_SCRIPT: scripts/common.sh
+  COM_SCRIPT: scripts/x86.sh
   TOOLCHAIN_TAG: Toolchain
   OPENWRT_RELEASE_TAG: x86_64
   SOURCE: lede
@@ -264,10 +263,8 @@ jobs:
         [ -e files ] && mv files $OPENWRT_PATH/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRT_PATH/.config
         chmod +x $GITHUB_WORKSPACE/scripts/*.sh
-        chmod +x $DIY_SCRIPT
         chmod +x $COM_SCRIPT
         cd $OPENWRT_PATH
-        $GITHUB_WORKSPACE/$DIY_SCRIPT
         $GITHUB_WORKSPACE/$COM_SCRIPT
         ./scripts/feeds update -a
         ./scripts/feeds install -a
