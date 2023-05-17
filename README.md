@@ -8,7 +8,7 @@
 - 云编译方法：[P3TERX](https://github.com/P3TERX/Actions-OpenWrt) 、 [Haiibo](https://github.com/haiibo/OpenWrt)
 - 固件打包：[Flippy](https://github.com/unifreq/openwrt_packit) 、 [ophub](https://github.com/ophub/kernel)
 - 使用 Github Actions 拉取 [ImmortalWrt](https://github.com/immortalwrt/immortalwrt) 或 [Lean](https://github.com/coolsnowwolf/lede) 的 Openwrt 源码仓库进行云编译
-- 固件默认管理地址：`10.10.10.1` 、 `10.10.11.1` 默认用户：`root` 默认密码：`password` 默认主题：`Argon`
+- 固件默认管理地址：`192.168.99.1` 、 默认用户：`root` 默认密码：`password` 默认主题：`Argon`
 - 适配 `ARMv8_N1` 和 `Newifi_D2` 的 OpenWrt 固件，分为 `ImmortalWrt版` 和 `Lean版` ，插件一样，仅源码不同
 -  `ImmortalWrt版` : `21.02` 分支，[F大](https://github.com/unifreq/openwrt_packit)打包 `5.4+` 内核 ； `Lean版` ：[F大](https://github.com/unifreq/openwrt_packit)打包 `6.0+` 内核
 - Releases 下载： [ARMv8_N1](https://github.com/v8040/AutoBuild-OpenWrt/releases/tag/ARMv8_N1) 和 [Newifi_D2](https://github.com/v8040/AutoBuild-OpenWrt/releases/tag/Newifi_D2)
