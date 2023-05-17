@@ -344,7 +344,5 @@ jobs:
           >  OpenWrt for ${{ env.OPENWRT_RELEASE_TAG }}
           - 编译时间：`${{ env.DATE }}`
           - 默认 IP：`192.168.99.1` 默认密码：`password`
-          - 集成`ddns` `openclash` `zerotier`，没有集成任何存储、下载、USB等相关插件
-          - `openclash务必设置小闪存模式`
           - 当前使用版本:【编译前的最后一次➦[${{ env.SOURCE }}源码](${{ env.SOURCE_URL }})更新记录】
             ${{ env.VERSION_INFO }}
