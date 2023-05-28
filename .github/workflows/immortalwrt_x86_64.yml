@@ -17,7 +17,7 @@ env:
 
 jobs:
   Toolchain:
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
 
     outputs:
       OPENWRT_PATH: ${{ steps.clone.outputs.OPENWRT_PATH }}
