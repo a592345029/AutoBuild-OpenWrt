@@ -17,7 +17,7 @@ env:
 
 jobs:
   Toolchain:
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
 
     outputs:
       OPENWRT_PATH: ${{ steps.clone.outputs.OPENWRT_PATH }}
@@ -37,7 +37,6 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        docker rmi `docker images -q`
         [[ -n "${AGENT_TOOLSDIRECTORY}" ]] && sudo rm -rf "${AGENT_TOOLSDIRECTORY}"
         sudo rm -rf /usr/share/dotnet /etc/apt/sources.list.d /usr/local/lib/android 2>/dev/null
         sudo -E apt-get -o Acquire::Retries=3 -y update
@@ -156,7 +155,7 @@ jobs:
 
   Build:
     needs: [Toolchain]
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
 
     env:
       OPENWRT_PATH: ${{ needs.Toolchain.outputs.OPENWRT_PATH }}
@@ -187,7 +186,6 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        docker rmi `docker images -q`
         [[ -n "${AGENT_TOOLSDIRECTORY}" ]] && sudo rm -rf "${AGENT_TOOLSDIRECTORY}"
         sudo rm -rf /usr/share/dotnet /etc/apt/sources.list.d /usr/local/lib/android 2>/dev/null
         sudo -E apt-get -o Acquire::Retries=3 -y update
@@ -204,31 +202,6 @@ jobs:
         sudo timedatectl set-timezone "${TZ}"
         echo "status=success" >> ${GITHUB_OUTPUT}
 
-    - name: 组合磁盘
-      if: ${{ steps.init.outputs.status }} == 'success' && !cancelled()
-      run: |
-        sudo swapoff -a && sudo rm -f /mnt/swapfile
-        export ROOT_FREE_KB=$(df --block-size=1024 --output=avail / | tail -1)
-        export ROOT_LOOP_KB=$(expr $ROOT_FREE_KB - 1048576)
-        export ROOT_LOOP_BYTES=$(expr $ROOT_LOOP_KB \* 1024)
-        sudo fallocate -l $ROOT_LOOP_BYTES /root.img
-        export ROOT_LOOP_DEVNAME=$(sudo losetup -Pf --show /root.img)
-        sudo pvcreate -f $ROOT_LOOP_DEVNAME
-        export MNT_FREE_KB=$(df --block-size=1024 --output=avail /mnt | tail -1)
-        export MNT_LOOP_KB=$(expr $MNT_FREE_KB - 102400)
-        export MNT_LOOP_BYTES=$(expr $MNT_LOOP_KB \* 1024)
-        sudo fallocate -l $MNT_LOOP_BYTES /mnt/mnt.img
-        export MNT_LOOP_DEVNAME=$(sudo losetup -Pf --show /mnt/mnt.img)
-        sudo pvcreate -f $MNT_LOOP_DEVNAME
-        sudo vgcreate vgstorage $ROOT_LOOP_DEVNAME $MNT_LOOP_DEVNAME
-        sudo lvcreate -n lvstorage -l 100%FREE vgstorage
-        export LV_DEVNAME=$(sudo lvscan | awk -F "'" '{print $2}')
-        sudo mkfs.btrfs -L combinedisk $LV_DEVNAME
-        sudo mount -o compress=zstd $LV_DEVNAME $GITHUB_WORKSPACE
-        sudo chown -R runner:runner $GITHUB_WORKSPACE
-        mkdir $GITHUB_WORKSPACE/tmp && chmod 777 $GITHUB_WORKSPACE/tmp
-        sudo cp -rp /tmp/* $GITHUB_WORKSPACE/tmp
-        sudo mount -B $GITHUB_WORKSPACE/tmp /tmp && df -hT
 
     - name: Checkout
       run: |
